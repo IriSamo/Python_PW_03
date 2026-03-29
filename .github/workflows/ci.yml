@@ -28,6 +28,14 @@ jobs:
       - name: Run UI tests
         run: uv run pytest
 
+      - name: Create test report
+        uses: dorny/test-reporter@v3
+        if: success() || failure()
+        with:
+          name: Test Execution Report
+          path: artifacts/reports/report.html
+          reporter: jest-junit
+
       - name: Upload artifacts (traces, screenshots, HTML-report)
         uses: actions/upload-artifact@v4
         if: always()
