@@ -1,0 +1,39 @@
+name: Playwright Tests
+
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          python-version: "3.14"
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --locked --all-extras --dev
+
+      - name: Install Playwright browsers
+        run: playwright install --with-deps
+
+      - name: Run UI tests
+        run: uv run pytest
+
+      - name: Upload artifacts (traces, screenshots, HTML-report)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-artifacts
+          path: |
+            artifacts/traces/
+            artifacts/screenshots/
+            artifacts/reports/
