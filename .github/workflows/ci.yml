@@ -26,14 +26,14 @@ jobs:
         run: uv run playwright install chromium --with-deps
 
       - name: Run UI tests
-        run: uv run pytest
+        run: uv run pytest --junitxml=artifacts/reports/results.xml
 
       - name: Create test report
         uses: dorny/test-reporter@v3
         if: success() || failure()
         with:
           name: Test Execution Report
-          path: artifacts/reports/report.html
+          path: artifacts/reports/report.xml
           reporter: python-xunit
 
       - name: Upload artifacts (traces, screenshots, HTML-report)
