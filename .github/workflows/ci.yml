@@ -34,7 +34,7 @@ jobs:
         with:
           name: Test Execution Report
           path: artifacts/reports/report.html
-          reporter: jest-junit
+          reporter: python-xunit
 
       - name: Upload artifacts (traces, screenshots, HTML-report)
         uses: actions/upload-artifact@v4
