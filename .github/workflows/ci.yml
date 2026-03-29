@@ -23,7 +23,7 @@ jobs:
         run: uv sync --locked --all-extras --dev
 
       - name: Install Playwright browsers
-        run: playwright install --with-deps
+        run: uv run playwright install --with-deps
 
       - name: Run UI tests
         run: uv run pytest
