@@ -6,7 +6,22 @@ import pytest
 load_dotenv()
 
 # -----------------------------
-# REQUIRED CONFIG
+# PROJECT ROOT
+# -----------------------------
+PROJECT_ROOT = Path(__file__).parent.parent.resolve()
+
+# -----------------------------
+# ARTIFACTS DIRS
+# -----------------------------
+ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
+TRACES_DIR = ARTIFACTS_DIR / "traces"
+SCREENSHOTS_DIR = ARTIFACTS_DIR / "screenshots"
+REPORTS_DIR = ARTIFACTS_DIR / "reports"
+HTML_REPORT_PATH = REPORTS_DIR / "report.html"
+XML_REPORT_PATH = REPORTS_DIR / "report.xml"
+
+# -----------------------------
+# CONFIG FROM ENV
 # -----------------------------
 HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
 SLOW_MO = int(os.getenv("SLOW_MO", 0))
@@ -14,12 +29,6 @@ VIEWPORT_WIDTH = int(os.getenv("VIEWPORT_WIDTH", 1280))
 VIEWPORT_HEIGHT = int(os.getenv("VIEWPORT_HEIGHT", 720))
 LOCALE = os.getenv("LOCALE", "en-UK")
 TIMEZONE_ID = os.getenv("conftest.py", "Europe/London")
-
-ARTIFACTS_DIR = Path("artifacts")
-TRACES_DIR = ARTIFACTS_DIR / "traces"
-SCREENSHOTS_DIR = ARTIFACTS_DIR / "screenshots"
-REPORTS_DIR = ARTIFACTS_DIR / "reports"
-HTML_REPORT_PATH = REPORTS_DIR / "report.html"
 
 
 # -----------------------------
