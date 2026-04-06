@@ -15,8 +15,7 @@ def test_drag_and_drop(page: Page):
 
     drag_element.drag_to(drop_target)
 
-    demo_text = page.locator("#demo").inner_text()
-    assert demo_text == "The p element was dropped into an accepted rectangle"
+    expect(page.locator("#demo")).to_have_text("The p element was dropped into an accepted rectangle")
 
 def test_click_and_hold(page: Page):
     click_box = page.locator("#click-box")
@@ -24,13 +23,13 @@ def test_click_and_hold(page: Page):
     click_box.hover()
     page.mouse.down()
 
-    assert click_box.inner_text() == "Keep holding down!"
-    assert click_box.evaluate("el => el.style.background") in ("rgb(199, 255, 188)", "#c7ffbc")
+    expect(click_box).to_have_text("Keep holding down!")
+    expect(click_box).to_have_css("background-color", "rgb(199, 255, 188)")
 
     page.mouse.up()
 
-    assert click_box.inner_text() == "No, don't let go :("
-    assert click_box.evaluate("el => el.style.background") in ("rgb(255, 188, 188)", "#ffbcbc")
+    expect(click_box).to_have_text("No, don't let go :(")
+    expect(click_box).to_have_css("background-color", "rgb(255, 188, 188)")
 
 def test_double_click(page: Page):
     double_click_area = page.locator("#doubleClickArea").first
@@ -38,8 +37,8 @@ def test_double_click(page: Page):
     expect(double_click_area).to_contain_text("Double Click Here")
     double_click_area.dblclick()
 
-    assert page.locator("#doubClickStartText").first.inner_text() == "Well Done!"
-    assert double_click_area.evaluate("el => el.style.backgroundColor") == "rgb(199, 255, 188)"
+    expect(page.locator("#doubClickStartText").first).to_have_text("Well Done!")
+    expect(double_click_area).to_have_css("background-color", "rgb(199, 255, 188)")
 
 def test_shift_click(page: Page):
     click_area = page.locator("#doubleClickArea").nth(1)
