@@ -8,7 +8,7 @@ load_dotenv()
 # -----------------------------
 # PROJECT ROOT
 # -----------------------------
-PROJECT_ROOT = Path(__file__).parent.parent.resolve()
+PROJECT_ROOT = Path(__file__).parent.resolve()
 
 # -----------------------------
 # ARTIFACTS DIRS
