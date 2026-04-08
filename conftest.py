@@ -25,10 +25,10 @@ XML_REPORT_PATH = REPORTS_DIR / "report.xml"
 # -----------------------------
 HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
 SLOW_MO = int(os.getenv("SLOW_MO", 0))
-VIEWPORT_WIDTH = int(os.getenv("VIEWPORT_WIDTH", 1280))
-VIEWPORT_HEIGHT = int(os.getenv("VIEWPORT_HEIGHT", 720))
+VIEWPORT_WIDTH = int(os.getenv("VIEWPORT_WIDTH", 1920))
+VIEWPORT_HEIGHT = int(os.getenv("VIEWPORT_HEIGHT", 1080))
 LOCALE = os.getenv("LOCALE", "en-UK")
-TIMEZONE_ID = os.getenv("conftest.py", "Europe/London")
+TIMEZONE_ID = os.getenv("TIMEZONE_ID", "Europe/London")
 
 
 # -----------------------------
@@ -55,7 +55,7 @@ def browser_type_launch_args():
 # -----------------------------
 # CONTEXT CONFIG
 # -----------------------------
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def browser_context_args():
 	return {
 		"viewport": {
