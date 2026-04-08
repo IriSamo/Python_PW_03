@@ -33,13 +33,13 @@ def test_sidepanel_change_size_by_css(page: Page):
 	sidepanel = page.get_by_role("navigation", name="Sidepanel")
 
 	expect(sidepanel).to_have_css("width", "256px")
-	expect(sidepanel).to_have_css("height", "720px")
+	expect(sidepanel).to_have_css("height", "1080px")
 
 	sidepanel.get_by_role("button").click()
 
 	expect(sidepanel).to_have_css("width", "83.1875px")
 	expect(sidepanel).to_have_css("width", re.compile(r"83(\.\d+)?px"))
-	expect(sidepanel).to_have_css("height", "720px")
+	expect(sidepanel).to_have_css("height", "1080px")
 
 
 def test_sidepanel_change_size_by_evaluate(page: Page):
@@ -47,8 +47,8 @@ def test_sidepanel_change_size_by_evaluate(page: Page):
 
 	size = element_size(sidepanel)
 	assert size["width"] == 256
-	assert size["height"] == 720
-	assert list(size.values()) == [256, 720]
+	assert size["height"] == 1080
+	assert list(size.values()) == [256, 1080]
 
 	sidepanel.get_by_role("button").click()
 
@@ -56,8 +56,8 @@ def test_sidepanel_change_size_by_evaluate(page: Page):
 
 	size = element_size(sidepanel)
 	assert size["width"] == 83
-	assert size["height"] == 720
-	assert list(size.values()) == [83, 720]
+	assert size["height"] == 1080
+	assert list(size.values()) == [83, 1080]
 
 
 def element_size(locator: Locator) -> dict[str, int]:
