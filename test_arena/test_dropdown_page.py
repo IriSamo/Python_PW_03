@@ -21,13 +21,15 @@ def test_dropdown_menu(dropdown_page):
 	dropdown_page.open()
 	dropdown_page.click_dropdown_menu()
 
-	expect(dropdown_page.dropdown_menu_item).to_have_count(len(DROPDOWN_PAGE.dropdown_menu_list))
-	expect(dropdown_page.dropdown_menu_item).to_have_text(DROPDOWN_PAGE.dropdown_menu_list)
+	expect(dropdown_page.dropdown_menu_item).to_have_count(len(DROPDOWN_PAGE.dropdown_menu_dict))
+	expected_items_list = list(DROPDOWN_PAGE.dropdown_menu_dict.values())
 
-	dropdown_page.select_option_dropdown_menu(DROPDOWN_PAGE.dropdown_menu_list[3])
+	expect(dropdown_page.dropdown_menu_item).to_have_text(expected_items_list)
 
-	expect(dropdown_page.dropdown_menu).to_have_value((DROPDOWN_PAGE.dropdown_menu_list[3]).lower())
-	expect(dropdown_page.dropdown_menu).not_to_have_value((DROPDOWN_PAGE.dropdown_menu_list[2]).lower())
+	dropdown_page.select_option_dropdown_menu(DROPDOWN_PAGE.dropdown_menu_dict['Honda'])
+
+	expect(dropdown_page.dropdown_menu).to_have_value((DROPDOWN_PAGE.dropdown_menu_dict['Honda']).lower())
+	expect(dropdown_page.dropdown_menu).not_to_have_value((DROPDOWN_PAGE.dropdown_menu_dict['Ford']).lower())
 
 
 
