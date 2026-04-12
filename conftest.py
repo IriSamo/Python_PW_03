@@ -84,16 +84,22 @@ def setup_tracing(context, request):
 
 	test_name = request.node.nodeid.replace("::", "_").replace("/", "_")[:100]
 	trace_path = TRACES_DIR / f"{test_name}.zip"
-	context.tracing.stop(path=str(trace_path))
+
+	if request.node.rep_call.failed:
+		context.tracing.stop(path=str(trace_path))
+	else:
+		context.tracing.stop()
 
 
 # -----------------------------
 # SCREENSHOT ON FAILURE
 # -----------------------------
-@pytest.hookimpl(hookwrapper=True)
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item, call):
 	outcome = yield
 	report = outcome.get_result()
+
+	setattr(item, f"rep_{report.when}", report)
 
 	if report.when != "call" or not report.failed:
 		return
@@ -108,7 +114,10 @@ def pytest_runtest_makereport(item, call):
 	screenshot_filename = f"{test_name}.png"
 	screenshot_path = SCREENSHOTS_DIR / screenshot_filename
 
-	page.screenshot(path=str(screenshot_path))
+	try:
+		page.screenshot(path=str(screenshot_path),timeout=5000)
+	except Exception as e:
+		print(f"Screenshot failed: {e}")
 
 	relative_path_for_report = f"../screenshots/{screenshot_filename}"
 
