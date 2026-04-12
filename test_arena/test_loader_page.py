@@ -21,5 +21,5 @@ def test_loader_completed(loader_page):
 	loader_page.open()
 
 	expect(loader_page.loader).to_be_visible()
-	expect(loader_page.loader).not_to_be_visible(timeout=7_000)
+	expect(loader_page.loader).to_be_hidden(timeout=7_000)
 	expect(loader_page.loading_complete_message).to_be_visible()
