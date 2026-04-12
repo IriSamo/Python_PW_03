@@ -10,15 +10,20 @@ def test_button_one_click(page: Page):
     button_one = page.get_by_role("button", name="BUTTON ONE")
     expect(button_one).to_be_visible()
 
-    with page.expect_event("dialog") as dialog_info:
-        button_one.click()
+    dialog_messages = []
 
-    dialog = dialog_info.value
-    print(f"Pop-up message: {dialog.message}")
-    assert dialog.message == "You clicked the first button!"
-    dialog.accept()
-    page.wait_for_timeout(3000)
+    def handle_dialog(dialog):
+        dialog_messages.append(dialog.message)
+        dialog.accept()
+
+    page.on("dialog", handle_dialog)
+
+    button_one.click()
+
+    assert dialog_messages[0] == "You clicked the first button!"
+
     expect(button_one).to_be_enabled()
+
 
 def test_button_four_disabled(page: Page):
     page.goto("https://www.automationtesting.co.uk/buttons.html")
