@@ -5,10 +5,8 @@ from playwright.sync_api import Page, expect
 
 def test_button_list_visible(page):
     page.goto('https://www.automationtesting.co.uk/index.html')
-    time.sleep(2)
 
     page.locator("a[href='buttons.html']").click()
-    time.sleep(2)
 
     #checking the WebElement.click()
     label1 = page.locator("h3:has-text('WebElement.click()')")
