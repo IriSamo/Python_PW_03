@@ -21,3 +21,6 @@ class SideMenu:
 		with self.page.expect_navigation():
 			self._side_menu.locator("text=Accordion").click()
 		return AccordionPage(self.page)
+
+	def get_menu_link(self, text: str):
+		return self._side_menu.locator("ul li a").filter(has_text=text).first
