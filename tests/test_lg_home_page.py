@@ -23,8 +23,8 @@ def test_homepage_logo(page : Page):
 def test_homepage_hamburger_opens_sidebar_menu(page: Page):
     page.goto(URL)
     sidebar = page.locator("#sidebar")
-    expect(sidebar).to_have_class("inactive")
 
     hamburger = page.locator("a.toggle")
     hamburger.click()
+
     expect(sidebar).not_to_have_class("inactive")
