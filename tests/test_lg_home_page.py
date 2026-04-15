@@ -25,6 +25,7 @@ def test_homepage_hamburger_opens_sidebar_menu(page: Page):
     sidebar = page.locator("#sidebar")
 
     hamburger = page.locator("a.toggle")
+    hamburger.wait_for(state="visible")
     hamburger.click()
 
     expect(sidebar).not_to_have_class("inactive")
