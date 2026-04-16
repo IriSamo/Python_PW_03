@@ -21,8 +21,10 @@ def test_homepage_logo(page : Page):
     expect(logo).to_be_visible()
 
 def test_homepage_hamburger_opens_sidebar_menu(page: Page):
+    page.set_viewport_size({"width": 1280, "height": 720})
     page.goto(URL)
     sidebar = page.locator("#sidebar")
+    expect(sidebar).to_have_class("inactive")
 
     hamburger = page.locator("a.toggle")
     hamburger.wait_for(state="visible")
