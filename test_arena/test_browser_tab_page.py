@@ -31,9 +31,6 @@ def test_open_new_browser_page_1(browser_tab_page, context):
 
     browser_tab_page.click_open_tab_btn()
 
-    # Wait until the new page is created
-    assert new_page is not None
-
     expect(new_page).to_have_url(re.compile("google.com"))
 
 
