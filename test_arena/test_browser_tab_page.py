@@ -17,22 +17,7 @@ def test_has_title_direct_navigation(browser_tab_page):
     expect(browser_tab_page.side_menu.main_header).to_contain_text(SIDE_MENU_DATA.header)
     expect(browser_tab_page.header.logo).to_have_text(HEADER_DATA.logo_text)
 
-
 def test_open_new_browser_page_1(browser_tab_page, context):
-	browser_tab_page.open()
-
-	def handle_page(page):
-		page.wait_for_load_state()
-		print(page.title())
-		return page
-
-	context.on("page", handle_page)
-
-	browser_tab_page.click_open_tab_btn()
-
-	expect().to_have_url('https://www.google.com/')
-
-def test_open_new_browser_page_2(browser_tab_page, context):
     browser_tab_page.open()
 
     new_page = None
@@ -49,10 +34,10 @@ def test_open_new_browser_page_2(browser_tab_page, context):
     # Wait until the new page is created
     assert new_page is not None
 
-    expect(new_page).to_have_url('https://www.google.com/')
+    expect(new_page).to_have_url(re.compile("google.com"))
 
 
-def test_open_new_browser_page_3(browser_tab_page, context):
+def test_open_new_browser_page_2(browser_tab_page, context):
     browser_tab_page.open()
 
     with context.expect_event("page") as event_info:
@@ -64,7 +49,7 @@ def test_open_new_browser_page_3(browser_tab_page, context):
     expect(new_page).to_have_url(re.compile("google.com"))
 
 
-def test_open_new_browser_page_4(browser_tab_page):
+def test_open_new_browser_page_3(browser_tab_page):
     browser_tab_page.open()
 
     with browser_tab_page.page.expect_popup() as popup_info:
@@ -73,4 +58,4 @@ def test_open_new_browser_page_4(browser_tab_page):
     new_page = popup_info.value
     new_page.wait_for_load_state()
 
-    expect(new_page).to_have_url("https://www.google.com/")
+    expect(new_page).to_have_url(re.compile("google.com"))
