@@ -22,10 +22,10 @@ def test_contact_form_verify_elements_visibility(contact_form_page):
 def test_contact_form_successful_submission(contact_form_page):
 
     contact_form_page.fill_contact_form(
-        first_name="Qa",
-        last_name="Tester",
-        email="qa.tester@tests.com",
-        comments="This is test only message."
+        first_name=CONTACT_FORM_PAGE.valid_first_name,
+        last_name=CONTACT_FORM_PAGE.valid_last_name,
+        email=CONTACT_FORM_PAGE.valid_email,
+        comments=CONTACT_FORM_PAGE.valid_comments,
     )
     contact_form_page.click_submit()
 
@@ -35,9 +35,9 @@ def test_contact_form_successful_submission(contact_form_page):
 
 def test_contact_form_email_required_with_server_error_message(contact_form_page):
     contact_form_page.fill_contact_form(
-        first_name="Qa",
-        last_name="Tester",
-        comments="Testing required email"
+        first_name=CONTACT_FORM_PAGE.valid_first_name,
+        last_name=CONTACT_FORM_PAGE.valid_last_name,
+        comments=CONTACT_FORM_PAGE.required_email_comments,
     )
     contact_form_page.click_submit()
 
@@ -50,10 +50,10 @@ def test_contact_form_email_required_with_server_error_message(contact_form_page
 def test_contact_form_invalid_email_with_server_error_message(contact_form_page):
 
     contact_form_page.fill_contact_form(
-        first_name="Qa",
-        last_name="Tester",
-        email="qa.tester@",
-        comments="Testing invalid email"
+        first_name=CONTACT_FORM_PAGE.valid_first_name,
+        last_name=CONTACT_FORM_PAGE.valid_last_name,
+        email=CONTACT_FORM_PAGE.invalid_email,
+        comments=CONTACT_FORM_PAGE.invalid_email_comments,
     )
     contact_form_page.click_submit()
 

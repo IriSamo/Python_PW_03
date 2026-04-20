@@ -1,18 +1,16 @@
 from functools import cached_property
-
 from pom_arena.base_page import BasePage
-from test_data.pages.contact_form_page_data import CONTACT_FORM_PAGE
 
 
 class ContactFormPage(BasePage):
-    END_POINT = CONTACT_FORM_PAGE.end_point
+    END_POINT = "/contactForm.html"
 
     def __init__(self, page):
         super().__init__(page, self.END_POINT)
 
     @cached_property
     def main_header(self):
-        return self._main_body.locator("h2", has_text=CONTACT_FORM_PAGE.main_header)
+        return self._main_body.locator("h2", has_text="Contact Form Test")
 
     @cached_property
     def first_name_input(self):
