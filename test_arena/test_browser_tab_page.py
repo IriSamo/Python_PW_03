@@ -17,7 +17,8 @@ def test_has_title_direct_navigation(browser_tab_page):
     expect(browser_tab_page.side_menu.main_header).to_contain_text(SIDE_MENU_DATA.header)
     expect(browser_tab_page.header.logo).to_have_text(HEADER_DATA.logo_text)
 
-def test_open_new_browser_page_1(browser_tab_page, context):
+def test_open_new_browser_page_1(page, browser_tab_page, context):
+    # page.pause()
     browser_tab_page.open()
 
     new_page = None
@@ -31,7 +32,7 @@ def test_open_new_browser_page_1(browser_tab_page, context):
 
     browser_tab_page.click_open_tab_btn()
 
-    expect(new_page).to_have_url(re.compile("google.com"))
+    expect(new_page).to_have_url(re.compile(r"google.com.*"))
 
 
 def test_open_new_browser_page_2(browser_tab_page, context):
@@ -43,7 +44,7 @@ def test_open_new_browser_page_2(browser_tab_page, context):
     new_page = event_info.value
     new_page.wait_for_load_state()
 
-    expect(new_page).to_have_url(re.compile("google.com"))
+    expect(new_page).to_have_url(re.compile(r"google.com.*"))
 
 
 def test_open_new_browser_page_3(browser_tab_page):
@@ -55,4 +56,4 @@ def test_open_new_browser_page_3(browser_tab_page):
     new_page = popup_info.value
     new_page.wait_for_load_state()
 
-    expect(new_page).to_have_url(re.compile("google.com"))
+    expect(new_page).to_have_url(re.compile(r"google.com.*"))
