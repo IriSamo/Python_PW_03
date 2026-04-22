@@ -29,4 +29,4 @@ def dropdown_page(page):
 
 @pytest.fixture
 def contact_form_page(page):
-	return ContactFormPage(page)
+	return ContactFormPage(page).open()
