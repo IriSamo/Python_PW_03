@@ -13,6 +13,10 @@ class SideMenu:
 	def main_header(self):
 		return self._side_menu.locator('h2')
 
+	@cached_property
+	def option_list(self):
+		return self._side_menu.locator("ul li a")
+
 	def click_item(self, text: str):
 		self._side_menu.locator(f"text={text}").click()
 
